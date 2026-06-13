@@ -59,18 +59,11 @@ const detectBrowserLocale = (): Locale => {
 
 function App() {
   const [count, setCount] = useState(0)
-  const [locale, setLocale] = useState<Locale>('fr')
+  const [locale, setLocale] = useState<Locale>(detectBrowserLocale)
   const [apiResponse, setApiResponse] = useState<string | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const t = translations[locale]
-
-  useEffect(() => {
-    const initialLocale = detectBrowserLocale()
-    if (initialLocale !== locale) {
-      setLocale(initialLocale)
-    }
-  }, [])
 
   useEffect(() => {
     const fetchData = async () => {
