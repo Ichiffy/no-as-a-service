@@ -44,11 +44,11 @@ func main() {
 func resolveLocale(raw string) string {
 	switch raw {
 	case "fr", "fr-FR", "fr_FR":
-		return "fr"
+		return "fr_FR"
 	case "en", "en-US", "en_US":
-		return "en"
+		return "en_US"
 	default:
-		return "en"
+		return "en_US"
 	}
 }
 

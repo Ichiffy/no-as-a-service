@@ -1,14 +1,12 @@
 import { useState, useEffect } from 'react'
-import type { ChangeEvent } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
+import NaaSLogo from './assets/imgs/naas-with-no-logo-bunny.png'
 import './App.css'
 
 type Locale = 'fr' | 'en'
 
 const translations: Record<Locale, Record<string, string>> = {
   fr: {
+    bannerTitle: 'No-as-a-Service',
     title: 'Démarrage',
     heroText: 'Éditez src/App.tsx et enregistrez pour tester HMR',
     counterLabel: 'Compteur:',
@@ -28,6 +26,7 @@ const translations: Record<Locale, Record<string, string>> = {
     bluesky: 'Bluesky',
   },
   en: {
+    bannerTitle: 'No-as-a-Service',
     title: 'Get started',
     heroText: 'Edit src/App.tsx and save to test HMR',
     counterLabel: 'Count is',
@@ -58,7 +57,6 @@ const detectBrowserLocale = (): Locale => {
 }
 
 function App() {
-  const [count, setCount] = useState(0)
   const [locale, setLocale] = useState<Locale>(detectBrowserLocale)
   const [apiResponse, setApiResponse] = useState<string | null>(null)
   const [loading, setLoading] = useState(true)
@@ -87,38 +85,29 @@ function App() {
     fetchData()
   }, [locale])
 
-  const handleLocaleChange = (event: ChangeEvent<HTMLSelectElement>) => {
-    setLocale(event.target.value as Locale)
-  }
-
   return (
     <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
+      <header className="app-banner">
+        <img src={NaaSLogo} alt="No-as-a-Service Logo" className="base"height="179" />
+        <h1>{t.bannerTitle}</h1>
+        <div className="locale-switch">
+          <button
+            type="button"
+            className={locale === 'en' ? 'active' : ''}
+            onClick={() => setLocale('en')}
+          >
+            EN
+          </button>
+          <span className="switch-separator">/</span>
+          <button
+            type="button"
+            className={locale === 'fr' ? 'active' : ''}
+            onClick={() => setLocale('fr')}
+          >
+            FR
+          </button>
         </div>
-        <div>
-          <h1>{t.title}</h1>
-          <p>{t.heroText}</p>
-        </div>
-        <div className="language-selector">
-          <label htmlFor="locale-select">{t.languageLabel}</label>
-          <select id="locale-select" value={locale} onChange={handleLocaleChange}>
-            <option value="fr">Français</option>
-            <option value="en">English</option>
-          </select>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          {t.counterLabel} {count}
-        </button>
-      </section>
-
+      </header>
       <section id="api-response">
         <h2>{t.apiSection}</h2>
         {loading && <p>{t.loading}</p>}
@@ -126,91 +115,6 @@ function App() {
         {apiResponse && <p>{apiResponse}</p>}
       </section>
 
-      <div className="ticks"></div>
-
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>{t.docsTitle}</h2>
-          <p>{t.docsText}</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                {t.explore}
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                {t.learnMore}
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>{t.connectTitle}</h2>
-          <p>{t.connectText}</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                {t.github}
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                {t.discord}
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                {t.xcom}
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                {t.bluesky}
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <div className="ticks"></div>
-      <section id="spacer"></section>
     </>
   )
 }

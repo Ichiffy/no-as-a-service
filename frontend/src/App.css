@@ -19,6 +19,7 @@
 
 .hero {
   position: relative;
+  max-width: 160px;
 
   .base,
   .framework,
@@ -28,7 +29,7 @@
   }
 
   .base {
-    width: 170px;
+    width: 120px;
     position: relative;
     z-index: 0;
   }
@@ -40,20 +41,81 @@
 
   .framework {
     z-index: 1;
-    top: 34px;
-    height: 28px;
+    top: 28px;
+    height: 22px;
     transform: perspective(2000px) rotateZ(300deg) rotateX(44deg) rotateY(39deg)
-      scale(1.4);
+      scale(1.2);
   }
 
   .vite {
     z-index: 0;
-    top: 107px;
-    height: 26px;
+    top: 92px;
+    height: 20px;
     width: auto;
     transform: perspective(2000px) rotateZ(300deg) rotateX(40deg) rotateY(39deg)
-      scale(0.8);
+      scale(0.7);
   }
+}
+
+.app-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1180px;
+  margin: 0 auto 24px;
+  padding: 16px 32px;
+  gap: 16px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  box-sizing: border-box;
+
+  h1 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px;
+  }
+}
+
+.locale-switch {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 6px 8px;
+  background: var(--card);
+  gap: 8px;
+}
+
+.locale-switch button {
+  min-width: 38px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  border: none;
+  background: transparent;
+  color: var(--text);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.locale-switch button.active {
+  background: var(--accent-bg);
+  color: var(--accent);
+}
+
+.locale-switch .switch-separator {
+  color: var(--text-muted);
+  font-weight: 700;
 }
 
 #center {
