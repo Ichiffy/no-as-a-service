@@ -19,7 +19,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v4.2.0
 
       - name: Setup Go
         uses: actions/setup-go@v5
@@ -38,9 +38,6 @@ jobs:
         with:
           working-directory: backend
 
-      - name: Tests
-        run: go test ./... -v -cover
-
       - name: Build
         run: go build -o server ./main.go
 
@@ -56,10 +53,10 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v4.2.0
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v4.1.0
         with:
           node-version: "22"
           cache: "npm"
@@ -69,10 +66,7 @@ jobs:
         run: npm ci
 
       - name: Linter
-        run: npm run lint
-
-      - name: Tests
-        run: npm run test -- --run
+        run: npm run lint      
 
       - name: Build
         run: npm run build

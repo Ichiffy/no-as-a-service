@@ -32,7 +32,9 @@ func main() {
 	mux.HandleFunc("/api/no", func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
 		lang := resolveLocale(r.URL.Query().Get("lang"))
-		json.NewEncoder(w).Encode(map[string]string{"message": getNoMessage(lang)})
+		if err := json.NewEncoder(w).Encode(map[string]string{"message": getNoMessage(lang)}); err != nil {
+			log.Printf("Erreur lors du encodage JSON: %v", err)
+		}
 	})
 
 	log.Println("Backend démarré sur http://localhost:8080")
