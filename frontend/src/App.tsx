@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import NaaSLogo from './assets/imgs/naas-with-no-logo-bunny.png'
 import './App.css'
 
 type Locale = 'fr-FR' | 'en-US'
@@ -46,7 +45,6 @@ function App() {
   return (
     <>
       <header className="app-banner">
-        <img src={NaaSLogo} alt="No-as-a-Service Logo" className="base" height="179" />
         <h1>{t('bannerTitle')}</h1>
         <div className="locale-switch">
           <button
@@ -67,7 +65,6 @@ function App() {
         </div>
       </header>
       <section id="api-response">
-        <h2>{t('apiSection')}</h2>
         {loading && <p>{t('loading')}</p>}
         {error && <p style={{ color: 'red' }}>{t('errorPrefix')}: {error}</p>}
         {apiResponse && <p>{apiResponse}</p>}
